@@ -2,25 +2,22 @@
   "name": "波力充电去广告",
   "description": "移除波力充电小程序（圆圆充电直营等）内的广告弹窗，不影响充电、下单等正常功能",
   "author": "hanzongchang",
-  "version": "1.0",
+  "version": "1.1",
   "mitm": {
     "hostname": [
-      "power-api.powerliber.com"
+      "power-api.powerliber.com",
+      "api.powerliber.com",
+      "api.power.powerliber.com"
     ]
   },
-  "rewrite": {
+  "script": {
     "local": [
       {
-        "pattern": "^https:\\/\\/power-api\\.powerliber\\.com\\/client\\/1\\/ad-rule\\/detail",
-        "type": "reject"
-      },
-      {
-        "pattern": "^https:\\/\\/power-api\\.powerliber\\.com\\/client\\/1\\/common\\/check-ad",
-        "type": "reject"
-      },
-      {
-        "pattern": "^https:\\/\\/power-api\\.powerliber\\.com\\/client\\/1\\/ad-config\\/all",
-        "type": "reject"
+        "name": "波力去广告",
+        "type": "http-response",
+        "pattern": "^https:\\/\\/power-api\\.powerliber\\.com\\/client\\/1\\/(common\\/check-ad|ad-rule\\/detail|ad-config\\/all)",
+        "script-path": "https://raw.githubusercontent.com/JAM-IU/loon-plugins/main/PowerLiber_block_ad.js",
+        "requires-body": true
       }
     ]
   }
